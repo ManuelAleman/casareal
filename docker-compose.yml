@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: casa-real-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 4CM13v1y
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/manuelaleman/Desktop/tareas/evaluacion-proyectos/CasaReal/ConfiguracionSQL.sql:/docker-entrypoint-initdb.d/ConfiguracionSQL.sql
+      - /Users/manuelaleman/Desktop/tareas/evaluacion-proyectos/CasaReal/mysql_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

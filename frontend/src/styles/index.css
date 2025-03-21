@@ -1,0 +1,22 @@
+@layer tailwind-base, primereact, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+html {
+  background-color: #F4F4F4;
+}
+
+.modal {
+  @apply bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto mt-20;
+}
+
+.overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center;
+}
