@@ -35,7 +35,11 @@ export const RegisterPage = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'El nombre es requerido';
+     if (!formData.name) {
+    newErrors.name = 'El nombre es requerido';
+  } else if (!formData.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)) {
+    newErrors.name = 'El nombre solo debe contener letras';
+  }
     if (!formData.phone) newErrors.phone = 'El teléfono es requerido';
     else if (!formData.phone.match(/^[0-9]{10}$/)) newErrors.phone = 'El teléfono no es válido';
     if (!formData.email) newErrors.email = 'El correo electrónico es requerido';
