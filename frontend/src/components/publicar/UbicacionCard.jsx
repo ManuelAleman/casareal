@@ -17,9 +17,14 @@ export const UbicacionCard = ({ formData, setFormData, setPagina }) => {
     const newErrors = {};
 
 
-    if (!formData.calle) {
-      newErrors.calle = "La calle es obligatoria";
-    }
+    if (!formData.calle || formData.calle.trim() === '') {
+  newErrors.calle = "La calle es obligatoria";
+} else if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\-#]{3,100}$/.test(formData.calle)) {
+  newErrors.calle = "Formato de calle inválido";
+} else if (!/[A-Za-zÁÉÍÓÚáéíóúÑñ]/.test(formData.calle)) {
+  newErrors.calle = "La calle debe contener al menos una letra";
+}
+
 
     if (!formData.numExterior) {
       newErrors.numExterior = "El numero exterior es obligatorio";

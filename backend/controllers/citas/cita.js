@@ -174,27 +174,32 @@ const cancelarCita = async (req, res) => {
 const getCitaById = async (req, res) => {
   try {
     const id = req.params.id;
-    conexion.query('SELECT * FROM Cita WHERE idCita = ?', [id], async (error, results) => {
+    const query = `
+      SELECT 
+        C.*, 
+        V.nombre AS nombreVendedor, 
+        Cmp.nombre AS nombreComprador
+      FROM Cita C
+      INNER JOIN Usuario V ON C.vendedor = V.idUsuario
+      INNER JOIN Usuario Cmp ON C.comprador = Cmp.idUsuario
+      WHERE C.idCita = ?
+    `;
+    conexion.query(query, [id], (error, results) => {
       if (error) {
         console.log(error);
-        return res.status(500).json({
-          error: 'Server error'
-        });
+        return res.status(500).json({ error: 'Server error' });
       }
       if (results.length === 0) {
-        return res.status(404).json({
-          error: 'Cita no encontrada'
-        });
+        return res.status(404).json({ error: 'Cita no encontrada' });
       }
       return res.status(200).json(results[0]);
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      error: 'Server error'
-    });
+    return res.status(500).json({ error: 'Server error' });
   }
-}
+};
+
 
 module.exports = {
   getCitasVendedor,

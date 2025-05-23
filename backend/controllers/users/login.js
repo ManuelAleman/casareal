@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../../helpers/jwt')
 
 const loginUser = async (req, res) => {
+  console.log('Login user');
   try {
     const { email, password } = req.body;
     conexion.query('SELECT * FROM Usuario WHERE correo = ?', [email], async (error, results) => {

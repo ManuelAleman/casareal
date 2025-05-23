@@ -25,8 +25,8 @@ export const GenerarContrato = () => {
             const cita = res.data;
             console.log(cita);
             setFormData({
-                comprador: cita.comprador,
-                vendedor: cita.vendedor,
+                comprador: cita.nombreComprador,
+                vendedor: cita.nombreVendedor,
                 propiedadID: cita.publicacion,
             });
         });

@@ -7,11 +7,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /Users/manuelaleman/Desktop/tareas/evaluacion-proyectos/CasaReal/ConfiguracionSQL.sql:/docker-entrypoint-initdb.d/ConfiguracionSQL.sql
-      - /Users/manuelaleman/Desktop/tareas/evaluacion-proyectos/CasaReal/mysql_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - ./ConfiguracionSQL.sql:/docker-entrypoint-initdb.d/ConfiguracionSQL.sql
     networks:
       - mynetwork
 
 networks:
   mynetwork:
     driver: bridge
+
+volumes:
+  db_data:
